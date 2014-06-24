@@ -1,4 +1,25 @@
 require 'configuration'
 require 'buddy_api/version'
+
+require 'buddy_api/album'
+require 'buddy_api/album_item'
+require 'buddy_api/blob'
+require 'buddy_api/checkin'
+require 'buddy_api/game'
+require 'buddy_api/identity'
+require 'buddy_api/location'
+require 'buddy_api/message'
+require 'buddy_api/metadata'
+require 'buddy_api/metric'
+require 'buddy_api/picture'
+require 'buddy_api/player'
+require 'buddy_api/push'
+require 'buddy_api/score'
+require 'buddy_api/scoreboard'
+require 'buddy_api/session'
+require 'buddy_api/user'
+require 'buddy_api/user_list'
+require 'buddy_api/video'
+
 module BuddyAPI
 end
