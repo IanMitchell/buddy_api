@@ -1,6 +1,9 @@
-# BuddyApi
+# Buddy API
 
-TODO: Write a gem description
+**Note:** This Gem is currently in development and unreleased at this time. Eventually, the below will be true!
+
+
+----
 
 ## Installation
 
@@ -20,14 +23,6 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
-## Testing
-
-To test this gem, you'll need to register a test application on Buddy. Make a new file `test/config.yml` with the following contents:
-
-    appID: Your ID Here
-    appKey: Your Key Here
-
-
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/buddy_api/fork )
@@ -35,3 +30,12 @@ To test this gem, you'll need to register a test application on Buddy. Make a ne
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+#### Testing
+
+To test this gem, you'll need to register a test application on Buddy. Make a new file `test/config.yml` with the following contents:
+
+    appID: Your ID Here
+    appKey: Your Key Here
+
+After that, you should be able to run `rake test` effectively.
