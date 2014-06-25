@@ -1,4 +1,6 @@
 require 'net/http'
+require 'json'
+
 require 'configuration'
 require 'buddy_api/version'
 
@@ -6,6 +8,7 @@ require 'buddy_api/album'
 require 'buddy_api/album_item'
 require 'buddy_api/blob'
 require 'buddy_api/checkin'
+require 'buddy_api/errors'
 require 'buddy_api/game'
 require 'buddy_api/identity'
 require 'buddy_api/location'
@@ -23,9 +26,18 @@ require 'buddy_api/user_list'
 require 'buddy_api/video'
 
 module BuddyAPI
+  extend Configuration
+
+  # TODO: Document
   ROOT_URL = 'https://api.buddyplatform.com'
+
+  # TODO: Document
   @@request_url = nil
+
+  # TODO: Document
   @@request_counter = Array.new
+
+  # TODO: Document
   @@tier = :free
 
   # TODO: Implement
@@ -33,23 +45,31 @@ module BuddyAPI
   end
 
   # TODO: Implement
-  def check_configuration
+  def self.valid_configuration?
+    !(self.app_id.nil? or self.app_key.nil?)
   end
 
   # TODO: Implement
-  def register_device(platform, options = {})
+  def self.register_device(platform, options = {})
+    raise InvalidConfiguration, 'Buddy API is not configured' unless self.valid_configuration?
+
     uri = URI(request_url + '/devices')
 
     params = { appID: self.app_id, appKey: self.app_key, platform: platform }
     params.merge options
 
     response = Net::HTTP.post_form(uri, params)
+    body = JSON.parse(response.body)
 
-    # If status is 400
-      # check 'error', raise that + "'errorNumber': 'message'"
-    # else
-      # return
-    # end
+    case response.code
+    when "400"
+      raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
+    when "201"
+      set_request_url(body['result']['serviceRoot']) if body['result']['serviceRoot']
+      return body
+    else
+      raise UnknownResponseCode, "register_device does not handle response #{response.code}"
+    end
   end
 
   # TODO: Implement
@@ -62,7 +82,7 @@ module BuddyAPI
   end
 
   # TODO: Document
-  def request_url
+  def self.request_url
     @@request_url || ROOT_URL
   end
 

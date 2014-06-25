@@ -20,6 +20,14 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Testing
+
+To test this gem, you'll need to register a test application on Buddy. Make a new file `test/config.yml` with the following contents:
+
+    appID: Your ID Here
+    appKey: Your Key Here
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/buddy_api/fork )
