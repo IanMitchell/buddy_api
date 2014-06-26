@@ -4,7 +4,7 @@ require 'net/https'
 module BuddyAPI
   class Device
 
-    # Public: Registers a device with Buddy. If a serviceRoot is set,
+    # Public: Registers a Device with Buddy. If a serviceRoot is set,
     # the gem will store the request url. For more information,
     # see http://buddyplatform.com/docs/Register%20Device
     #
@@ -65,7 +65,36 @@ module BuddyAPI
       end
     end
 
-    # Public: TODO: Implement.
+    # Public: Updates a Device with Buddy. For more information
+    # see http://buddyplatform.com/docs/Update%20Device
+    #
+    # options - The Array options used to send updated data. Note that because
+    #           this is submitted as an HTTP header, it must be in a format similar
+    #           to { 'key' => 'value' }. (default: {}):
+    #           'location'       - The String for the location value. Valid format
+    #                              is <latitude>,<longitude> (optional).
+    #           'pushToken'      - The String for a platform specific token used
+    #                              for push notifications (optional).
+    #           'connectionType' - The String for network connection type.
+    #                              Valid options are "Unknown", "Carrier" and
+    #                              "Wifi" (optional).
+    #           'isProduction'   - The Boolean for indicating if the installed
+    #                              application is published and in
+    #                              production (optional).
+    #           'tag'            - The String to attach to this object (optional).
+    #
+    # Examples
+    #
+    #   BuddyAPI::Device::update({ 'location' => '50,50' })
+    #   # => {
+    #          "status": 200,
+    #          "request_id": "53abaa80b32fad05c847bc2d"
+    #        }
+    #
+    # Returns a Boolean indicating if successful.
+    # Raises BuddyAPI::AuthAccessTokenInvalid if the authorization token
+    #   is invalid or expired
+    # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.update(token, options = {})
       uri = URI(BuddyAPI::request_url + '/devices/current')
       http = Net::HTTP.new(uri.host, uri.port)
