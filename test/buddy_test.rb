@@ -20,4 +20,13 @@ class BuddyTest < Test::Unit::TestCase
     sleep(1.5)
     assert_equal 0, BuddyAPI::call_count
   end
+
+  def test_request_url
+    assert_equal BuddyAPI::ROOT_URL, BuddyAPI::request_url
+
+    BuddyAPI::set_request_url('https://api-2.buddyplatform.com')
+    assert_equal 'https://api-2.buddyplatform.com', BuddyAPI::request_url
+
+    BuddyAPI::set_request_url BuddyAPI::ROOT_URL
+  end
 end

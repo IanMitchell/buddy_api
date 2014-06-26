@@ -52,7 +52,7 @@ module BuddyAPI
   end
 
   # Public: TODO: Document
-  def set_request_url(url)
+  def self.set_request_url(url)
     @@request_url = url
   end
 
