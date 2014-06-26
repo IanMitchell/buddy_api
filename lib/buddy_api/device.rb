@@ -54,6 +54,8 @@ module BuddyAPI
       response = Net::HTTP.post_form(uri, params)
       body = JSON.parse(response.body)
 
+      BuddyAPI::increment_call_count
+
       case response.code
       when '400'
         raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
@@ -108,6 +110,8 @@ module BuddyAPI
 
       response = http.request(request)
       body = JSON.parse(response.body)
+
+      BuddyAPI::increment_call_count
 
       case response.code
       when '401'

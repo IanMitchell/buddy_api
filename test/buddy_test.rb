@@ -10,4 +10,11 @@ class BuddyTest < Test::Unit::TestCase
     TestHelper::configure_buddy
     assert BuddyAPI::valid_configuration?
   end
+
+  def test_valid_request_counter
+    TestHelper::configure_buddy
+    response = BuddyAPI::Device::register('Gem Test')
+
+    assert_equal BuddyAPI::call_count, 1
+  end
 end

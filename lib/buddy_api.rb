@@ -62,20 +62,20 @@ module BuddyAPI
   end
 
   # Public: TODO: Document
-  def increment_call_count
+  def self.increment_call_count
     update_request_counter
     @@request_counter << Time.now.strftime('%Y%m%d%H%M%S%L').to_i
   end
 
   # Public: TODO: Document
-  def get_call_count
+  def self.call_count
     update_request_counter
     @@request_counter.count
   end
 
   # Public: TODO: Document
-  def update_request_counter
-    @request_counter.each do |r|
+  def self.update_request_counter
+    @@request_counter.each do |r|
       if r - Time.now.strftime('%Y%m%d%H%M%S%L').to_i > 1000
         @@request_counter.delete r
       end
