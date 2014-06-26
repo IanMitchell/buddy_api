@@ -15,7 +15,7 @@ class DeviceTest < Test::Unit::TestCase
 
     # In actual code, case/when requires 201 be string,
     # but this can be int?
-    assert_equal response['status'], 201
+    assert_equal 201, response['status']
   end
 
   def test_register_missing_param

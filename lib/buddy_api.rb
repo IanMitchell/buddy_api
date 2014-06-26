@@ -76,7 +76,7 @@ module BuddyAPI
   # Public: TODO: Document
   def self.update_request_counter
     @@request_counter.each do |r|
-      if r - Time.now.strftime('%Y%m%d%H%M%S%L').to_i > 1000
+      if Time.now.strftime('%Y%m%d%H%M%S%L').to_i - r > 1000
         @@request_counter.delete r
       end
     end

@@ -15,6 +15,9 @@ class BuddyTest < Test::Unit::TestCase
     TestHelper::configure_buddy
     response = BuddyAPI::Device::register('Gem Test')
 
-    assert_equal BuddyAPI::call_count, 1
+    assert_equal 1, BuddyAPI::call_count
+
+    sleep(1.5)
+    assert_equal 0, BuddyAPI::call_count
   end
 end
