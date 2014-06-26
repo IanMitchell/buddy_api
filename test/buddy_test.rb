@@ -4,7 +4,7 @@ require 'buddy_api'
 
 class BuddyTest < Test::Unit::TestCase
   def test_valid_configuration
-    TestHelper::wipe_configuration
+    BuddyAPI::reset
     assert !BuddyAPI::valid_configuration?
 
     TestHelper::configure_buddy

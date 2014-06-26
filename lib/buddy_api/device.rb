@@ -90,9 +90,9 @@ module BuddyAPI
     #
     #   BuddyAPI::Device::update('token', { 'location' => '50,50' })
     #   # => {
-    #          "status": 200,
-    #          "request_id": "..."
-    #        }
+    #   #      "status": 200,
+    #   #      "request_id": "..."
+    #   #    }
     #
     # Returns a Boolean indicating if successful.
     # Raises BuddyAPI::AuthAccessTokenInvalid if the authorization token

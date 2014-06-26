@@ -4,7 +4,7 @@ require 'buddy_api'
 
 class DeviceTest < Test::Unit::TestCase
   def test_register_configuration_check
-    TestHelper::wipe_configuration
+    BuddyAPI::reset
     assert_raises(BuddyAPI::InvalidConfiguration) { BuddyAPI::Device::register("") }
   end
 

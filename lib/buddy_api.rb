@@ -47,17 +47,16 @@ module BuddyAPI
   # Private: Tracks the most recent API calls for rate limiting information.
   @@request_counter = Array.new
 
-  # Private: Tracks the application tier for rate limiting information.
-  # Must be one of the following: :free, :pro, :enterprise
-  @@tier = :free
-
   # Public: TODO: Implement
   def init
   end
 
   # Public: TODO: Implement
   def self.valid_configuration?
-    !(self.app_id.nil? or self.app_key.nil?)
+    plan = (self.tier.eql? :free or self.tier.eql? :pro or self.tier.eql? :enterprise)
+    credentials = !(self.app_id.nil? or self.app_key.nil?)
+
+    (plan and credentials)
   end
 
   # Public: TODO: Document
@@ -92,28 +91,16 @@ module BuddyAPI
   end
 
   # Public: TODO: Document
-  def set_tier(tier)
-    if tier.eql? :free or tier.eql? :pro or tier.eql? :enterprise
-      @@tier = tier
-    else
-      raise ArgumentError, 'Tier must be one of [:free, :pro, :enterprise]'
-    end
-  end
-
-  # Public: TODO: Document
   def rate_capped?
-    case @@tier
-    when :free
-      @@request_counter.count < FREE_TIER_CAP
-    when :pro
-      @@request_counter.count < PRO_TIER_CAP
-    when :enterprise
-      @@request_counter.count < ENTERPRISE_TIER_CAP
-    end
+    requests_left.eql? 0
   end
 
   # Public: TODO: Document
   def requests_left
+    raise InvalidConfiguration, 'Buddy API is not configured' unless valid_configuration?
+
+    update_request_counter
+
     case @@tier
     when :free
       FREE_TIER_CAP - @@request_counter.count

@@ -7,13 +7,7 @@ class TestHelper
     BuddyAPI.configure do |config|
       config.app_id = app['appID']
       config.app_key = app['appKey']
-    end
-  end
-
-  def self.wipe_configuration
-    BuddyAPI.configure do |config|
-      config.app_id = nil
-      config.app_key = nil
+      config.tier = :free
     end
   end
 end

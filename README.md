@@ -23,6 +23,13 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+    BuddyAPI.configure do |config|
+      config.app_id = 'AppID Here'
+      config.app_key = 'AppKey Here'
+      # Must be one of [:free, :pro, :enterprise]. Defaults to :free
+      config.tier = :free
+    end
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/buddy_api/fork )
