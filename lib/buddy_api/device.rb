@@ -68,6 +68,7 @@ module BuddyAPI
     # Public: Updates a Device with Buddy. For more information
     # see http://buddyplatform.com/docs/Update%20Device
     #
+    # token   - The authorization token returned by BuddyAPI::Device::register
     # options - The Array options used to send updated data. Note that because
     #           this is submitted as an HTTP header, it must be in a format similar
     #           to { 'key' => 'value' }. (default: {}):
@@ -85,7 +86,7 @@ module BuddyAPI
     #
     # Examples
     #
-    #   BuddyAPI::Device::update({ 'location' => '50,50' })
+    #   BuddyAPI::Device::update('token', { 'location' => '50,50' })
     #   # => {
     #          "status": 200,
     #          "request_id": "53abaa80b32fad05c847bc2d"
