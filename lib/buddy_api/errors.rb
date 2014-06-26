@@ -15,4 +15,8 @@ module BuddyAPI
   # Public: Raised when a parameter is formatted
   # incorrectly in a Buddy Platform API call.
   class ParameterIncorrectFormat < Exception; end
+
+  # Public: Raised when an access token is invalid
+  # or expired.
+  class AuthAccessTokenInvalid < Exception; end
 end

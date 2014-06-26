@@ -21,3 +21,4 @@ tmp
 *.a
 mkmf.log
 test/config.yml
+notes.txt
