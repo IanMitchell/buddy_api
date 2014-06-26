@@ -1,42 +1,42 @@
 module BuddyAPI
   class User
-    # TODO: Implement
+    # Public: TODO: Implement
     def create
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def login
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def social_login
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def logout
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def get
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def search
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def update
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def delete
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def reset_password_request
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def reset_password
     end
   end

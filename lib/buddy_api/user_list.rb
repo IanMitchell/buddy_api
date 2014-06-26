@@ -1,22 +1,22 @@
 module BuddyAPI
   class UserList
-    # TODO: Implement
+    # Public: TODO: Implement
     def create
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def get
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def add
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def remove
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def list
     end
   end

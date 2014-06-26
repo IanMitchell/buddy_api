@@ -8,6 +8,7 @@ require 'buddy_api/album'
 require 'buddy_api/album_item'
 require 'buddy_api/blob'
 require 'buddy_api/checkin'
+require 'buddy_api/device'
 require 'buddy_api/errors'
 require 'buddy_api/game'
 require 'buddy_api/identity'
@@ -28,77 +29,51 @@ require 'buddy_api/video'
 module BuddyAPI
   extend Configuration
 
-  # TODO: Document
+  # Public: Default endpoint for a Buddy Platform API call.
   ROOT_URL = 'https://api.buddyplatform.com'
 
-  # TODO: Document
+  # Private: Stored serviceEndpoint returned from Device::register.
   @@request_url = nil
 
-  # TODO: Document
+  # Private: Tracks the most recent API calls for rate limiting information.
   @@request_counter = Array.new
 
-  # TODO: Document
+  # Private: Tracks the application tier for rate limiting information.
+  # Must be one of the following: :free, :pro, :enterprise
   @@tier = :free
 
-  # TODO: Implement
+  # Public: TODO: Implement
   def init
   end
 
-  # TODO: Implement
+  # Public: TODO: Implement
   def self.valid_configuration?
     !(self.app_id.nil? or self.app_key.nil?)
   end
 
-  # TODO: Implement
-  def self.register_device(platform, options = {})
-    raise InvalidConfiguration, 'Buddy API is not configured' unless self.valid_configuration?
-
-    uri = URI(request_url + '/devices')
-
-    params = { appID: self.app_id, appKey: self.app_key, platform: platform }
-    params.merge options
-
-    response = Net::HTTP.post_form(uri, params)
-    body = JSON.parse(response.body)
-
-    case response.code
-    when "400"
-      raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
-    when "201"
-      set_request_url(body['result']['serviceRoot']) if body['result']['serviceRoot']
-      return body
-    else
-      raise UnknownResponseCode, "register_device does not handle response #{response.code}"
-    end
-  end
-
-  # TODO: Implement
-  def update_device
-  end
-
-  # TODO: Document
+  # Public: TODO: Document
   def set_request_url(url)
     @@request_url = url
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def self.request_url
     @@request_url || ROOT_URL
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def increment_call_count
     update_request_counter
     @@request_counter << Time.now.strftime('%Y%m%d%H%M%S%L').to_i
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def get_call_count
     update_request_counter
     @@request_counter.count
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def update_request_counter
     @request_counter.each do |r|
       if r - Time.now.strftime('%Y%m%d%H%M%S%L').to_i > 1000
@@ -107,7 +82,7 @@ module BuddyAPI
     end
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def set_tier(tier)
     if tier.eql? :free or tier.eql? :pro or tier.eql? :enterprise
       @@tier = tier
@@ -116,7 +91,7 @@ module BuddyAPI
     end
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def rate_capped?
     case @@tier
     when :free
@@ -128,7 +103,7 @@ module BuddyAPI
     end
   end
 
-  # TODO: Document
+  # Public: TODO: Document
   def requests_left
     case @@tier
     when :free

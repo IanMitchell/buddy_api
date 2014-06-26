@@ -1,10 +1,10 @@
 module BuddyAPI
   class Push
-    # TODO: Implement
+    # Public: TODO: Implement
     def send
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def record_recieve
     end
   end

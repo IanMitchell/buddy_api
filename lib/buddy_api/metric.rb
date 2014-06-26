@@ -1,10 +1,10 @@
 module BuddyAPI
   class Metric
-    # TODO: Implement
+    # Public: TODO: Implement
     def record
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def finish
     end
   end

@@ -1,26 +1,26 @@
 module BuddyAPI
   class Location
-    # TODO: Implement
+    # Public: TODO: Implement
     def create
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def get
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def search
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def update
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def delete
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def flag
     end
   end

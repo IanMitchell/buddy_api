@@ -1,6 +1,6 @@
 module BuddyAPI
   class Score
-    # TODO: Implement
+    # Public: TODO: Implement
     def create
     end
   end

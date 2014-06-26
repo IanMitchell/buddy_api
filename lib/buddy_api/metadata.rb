@@ -1,22 +1,22 @@
 module BuddyAPI
   class MetaData
-    # TODO: Implement
+    # Public: TODO: Implement
     def set
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def increment
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def get
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def search
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def delete
     end
   end

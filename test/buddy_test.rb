@@ -10,13 +10,4 @@ class BuddyTest < Test::Unit::TestCase
     TestHelper::configure_buddy
     assert BuddyAPI::valid_configuration?
   end
-
-  def test_register_device
-    TestHelper::configure_buddy
-
-    response = BuddyAPI::register_device('Gem Test')
-    assert_equal response['status'], 201
-
-    assert_raises(BuddyAPI::ParameterMissingRequiredValue) { BuddyAPI::register_device("") }
-  end
 end

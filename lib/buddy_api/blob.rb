@@ -1,26 +1,26 @@
 module BuddyAPI
   class Blob
-    # TODO: Implement
+    # Public: TODO: Implement
     def create
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def get
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def get_file
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def search
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def update
     end
 
-    # TODO: Implement
+    # Public: TODO: Implement
     def delete
     end
   end
