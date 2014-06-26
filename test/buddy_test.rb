@@ -27,6 +27,7 @@ class BuddyTest < Test::Unit::TestCase
     BuddyAPI::set_request_url('https://api-2.buddyplatform.com')
     assert_equal 'https://api-2.buddyplatform.com', BuddyAPI::request_url
 
+    # Reset for future tests
     BuddyAPI::set_request_url BuddyAPI::ROOT_URL
   end
 end
