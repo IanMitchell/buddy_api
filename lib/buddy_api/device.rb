@@ -89,7 +89,7 @@ module BuddyAPI
     #   BuddyAPI::Device::update('token', { 'location' => '50,50' })
     #   # => {
     #          "status": 200,
-    #          "request_id": "53abaa80b32fad05c847bc2d"
+    #          "request_id": "..."
     #        }
     #
     # Returns a Boolean indicating if successful.
