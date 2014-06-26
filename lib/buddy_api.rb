@@ -32,6 +32,15 @@ module BuddyAPI
   # Public: Default endpoint for a Buddy Platform API call.
   ROOT_URL = 'https://api.buddyplatform.com'
 
+  # Public: Calls/Second rate-limit cap for Free tier.
+  FREE_TIER_CAP = 20
+
+  # Public: Calls/Second rate-limit cap for Pro tier.
+  PRO_TIER_CAP = 40
+
+  # Public: Calls/Second rate-limit cap for Enterprise tier.
+  ENTERPRISE_TIER_CAP = 60
+
   # Private: Stored serviceEndpoint returned from Device::register.
   @@request_url = nil
 
@@ -95,11 +104,11 @@ module BuddyAPI
   def rate_capped?
     case @@tier
     when :free
-      @@request_counter.count < 20
+      @@request_counter.count < FREE_TIER_CAP
     when :pro
-      @@request_counter.count < 40
+      @@request_counter.count < PRO_TIER_CAP
     when :enterprise
-      @@request_counter.count < 60
+      @@request_counter.count < ENTERPRISE_TIER_CAP
     end
   end
 
@@ -107,11 +116,11 @@ module BuddyAPI
   def requests_left
     case @@tier
     when :free
-      20 - @@request_counter.count
+      FREE_TIER_CAP - @@request_counter.count
     when :pro
-      40 - @@request_counter.count
+      PRO_TIER_CAP - @@request_counter.count
     when :enterprise
-      60 - @@request_counter.count
+      ENTERPRISE_TIER_CAP - @@request_counter.count
     end
   end
 end
