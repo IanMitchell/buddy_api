@@ -8,6 +8,9 @@ module BuddyAPI
   # API call.
   class UnknownResponseCode < Exception; end
 
+  # TODO: Document
+  class UnknownError < Exception; end
+
   # Public: Raised when a required parameter is missing
   # from a Buddy Platform API call.
   class ParameterMissingRequiredValue < Exception; end

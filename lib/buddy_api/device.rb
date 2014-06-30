@@ -58,7 +58,11 @@ module BuddyAPI
 
       case response.code
       when '400'
-        raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
+        begin
+          raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
+        rescue
+          raise UnknownError, "Unknown Error encountered: #{body['error']}"
+        end
       when '201'
         set_request_url(body['result']['serviceRoot']) if body['result']['serviceRoot']
         return body
@@ -115,7 +119,11 @@ module BuddyAPI
 
       case response.code
       when '401'
-        raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
+        begin
+          raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
+        rescue
+          raise UnknownError, "Unknown Error encountered: #{body['error']}"
+        end
       when '200'
         return true
       else

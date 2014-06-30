@@ -27,7 +27,7 @@ class DeviceTest < Test::Unit::TestCase
     TestHelper::configure_buddy
 
     assert_raises(BuddyAPI::ParameterIncorrectFormat) do
-      r = BuddyAPI::Device::register('Gem Test', { 'location' => '5050' })
+      BuddyAPI::Device::register('Gem Test', { 'location' => '5050' })
     end
   end
 
