@@ -44,9 +44,9 @@ module BuddyAPI
     # Raises BuddyAPI::ParameterMissingRequiredValue if a required parameter is missing.
     # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.register(platform, options = {})
-      raise InvalidConfiguration, 'Buddy API is not configured' unless BuddyAPI::valid_configuration?
+      raise InvalidConfiguration, 'Buddy API is not configured' unless BuddyAPI.valid_configuration?
 
-      uri = URI(BuddyAPI::request_url + '/devices')
+      uri = URI(BuddyAPI.request_url + '/devices')
 
       params = { 'appID' => BuddyAPI.app_id, 'appKey' => BuddyAPI.app_key, 'platform' => platform }
       params.merge! options
@@ -54,7 +54,7 @@ module BuddyAPI
       response = Net::HTTP.post_form(uri, params)
       body = JSON.parse(response.body)
 
-      BuddyAPI::increment_call_count
+      BuddyAPI.increment_call_count
 
       case response.code
       when '400'
@@ -103,7 +103,7 @@ module BuddyAPI
     #   is invalid or expired
     # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.update(token, options = {})
-      uri = URI(BuddyAPI::request_url + '/devices/current')
+      uri = URI(BuddyAPI.request_url + '/devices/current')
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_PEER
@@ -115,7 +115,7 @@ module BuddyAPI
       response = http.request(request)
       body = JSON.parse(response.body)
 
-      BuddyAPI::increment_call_count
+      BuddyAPI.increment_call_count
 
       case response.code
       when '401'

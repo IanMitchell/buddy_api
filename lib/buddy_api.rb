@@ -53,10 +53,10 @@ module BuddyAPI
 
   # Public: TODO: Implement
   def self.valid_configuration?
-    plan = (self.tier.eql? :free or self.tier.eql? :pro or self.tier.eql? :enterprise)
-    credentials = !(self.app_id.nil? or self.app_key.nil?)
+    plan = (self.tier.eql?(:free) || self.tier.eql?(:pro) || self.tier.eql?(:enterprise))
+    credentials = !(self.app_id.nil? || self.app_key.nil?)
 
-    (plan and credentials)
+    plan && credentials
   end
 
   # Public: TODO: Document
@@ -101,7 +101,7 @@ module BuddyAPI
 
     update_request_counter
 
-    case @@tier
+    case self.tier
     when :free
       FREE_TIER_CAP - @@request_counter.count
     when :pro
