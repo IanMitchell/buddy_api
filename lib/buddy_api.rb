@@ -47,7 +47,7 @@ module BuddyAPI
   # Private: Tracks the most recent API calls for rate limiting information.
   @@request_counter = Array.new
 
-  # Public: TODO: Implement
+  # Public: TODO: Document
   def self.valid_configuration?
     plan = (self.tier.eql?(:free) || self.tier.eql?(:pro) || self.tier.eql?(:enterprise))
     credentials = !(self.app_id.nil? || self.app_key.nil?)
@@ -79,10 +79,8 @@ module BuddyAPI
 
   # Public: TODO: Document
   def self.update_request_counter
-    @@request_counter.each do |r|
-      if Time.now.strftime('%Y%m%d%H%M%S%L').to_i - r > 1000
-        @@request_counter.delete r
-      end
+    @@request_counter.delete_if do |r|
+      Time.now.strftime('%Y%m%d%H%M%S%L').to_i - r > 1_000
     end
   end
 
