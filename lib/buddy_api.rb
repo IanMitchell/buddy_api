@@ -41,7 +41,7 @@ module BuddyAPI
   # Public: Calls/Second rate-limit cap for Enterprise tier.
   ENTERPRISE_TIER_CAP = 60
 
-  # Private: Stored serviceEndpoint returned from Device::register.
+  # Private: Stored serviceEndpoint returned from Device.register.
   @@request_url = nil
 
   # Private: Tracks the most recent API calls for rate limiting information.

@@ -2,8 +2,7 @@ require 'uri'
 require 'net/https'
 
 module BuddyAPI
-  class Device
-
+  module Device
     # Public: Registers a Device with Buddy. If a serviceRoot is set,
     # the gem will store the request url. For more information,
     # see http://buddyplatform.com/docs/Register%20Device
@@ -42,6 +41,7 @@ module BuddyAPI
     # Raises BuddyAPI::InvalidConfiguration if appID and appKey aren't set.
     # Raises BuddyAPI::ParameterIncorrectFormat if a parameter format is incorrect.
     # Raises BuddyAPI::ParameterMissingRequiredValue if a required parameter is missing.
+    # Raises BuddyAPI::UnknownError if a Buddy error isn't recognized
     # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.register(platform, options = {})
       raise InvalidConfiguration, 'Buddy API is not configured' unless BuddyAPI.valid_configuration?
@@ -67,7 +67,7 @@ module BuddyAPI
         set_request_url(body['result']['serviceRoot']) if body['result']['serviceRoot']
         return body
       else
-        raise UnknownResponseCode, "Device::register does not handle response #{response.code}"
+        raise UnknownResponseCode, "Device.register does not handle response #{response.code}"
       end
     end
 
@@ -101,6 +101,7 @@ module BuddyAPI
     # Returns a Boolean indicating if successful.
     # Raises BuddyAPI::AuthAccessTokenInvalid if the authorization token
     #   is invalid or expired
+    # Raises BuddyAPI::UnknownError if a Buddy error isn't recognized
     # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.update(token, options = {})
       uri = URI(BuddyAPI.request_url + '/devices/current')
@@ -127,7 +128,7 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "Device::update does not handle response @{response.code}"
+        raise UnknownResponseCode, "Device.update does not handle response @{response.code}"
       end
     end
   end
