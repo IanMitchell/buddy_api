@@ -38,10 +38,10 @@ module BuddyAPI
     #   #    }
     #
     # Returns the response body Array.
-    # Raises BuddyAPI::InvalidConfiguration if appID and appKey aren't set.
+    # Raises BuddyAPI::InvalidConfiguration if appID and appKey are not set.
     # Raises BuddyAPI::ParameterIncorrectFormat if a parameter format is incorrect.
     # Raises BuddyAPI::ParameterMissingRequiredValue if a required parameter is missing.
-    # Raises BuddyAPI::UnknownError if a Buddy error isn't recognized
+    # Raises BuddyAPI::UnknownError if a Buddy error is not recognized
     # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.register(platform, options = {})
       raise InvalidConfiguration, 'Buddy API is not configured' unless BuddyAPI.valid_configuration?
@@ -101,7 +101,7 @@ module BuddyAPI
     # Returns a Boolean indicating if successful.
     # Raises BuddyAPI::AuthAccessTokenInvalid if the authorization token
     #   is invalid or expired
-    # Raises BuddyAPI::UnknownError if a Buddy error isn't recognized
+    # Raises BuddyAPI::UnknownError if a Buddy error is not recognized
     # Raises BuddyAPI::UnknownResponseCode if response code is unexpected.
     def self.update(token, options = {})
       uri = URI(BuddyAPI.request_url + '/devices/current')
