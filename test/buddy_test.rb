@@ -13,12 +13,30 @@ class BuddyTest < Test::Unit::TestCase
 
   def test_valid_request_counter
     TestHelper.configure_buddy
+    sleep(1)
+
     response = BuddyAPI::Device.register('Gem Test')
 
     assert_equal 1, BuddyAPI.call_count
 
-    sleep(1.5)
+    sleep(1)
     assert_equal 0, BuddyAPI.call_count
+  end
+
+  def test_valid_rate_capped
+    TestHelper.configure_buddy
+    TestHelper.check_rate_limit
+
+    response = BuddyAPI::Device.register('Gem Test')
+
+    assert !BuddyAPI.rate_capped?
+    sleep(1)
+
+    20.times do |i|
+      BuddyAPI.increment_call_count
+    end
+
+    assert BuddyAPI.rate_capped?
   end
 
   def test_request_url

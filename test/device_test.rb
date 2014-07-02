@@ -5,11 +5,14 @@ require 'buddy_api'
 class DeviceTest < Test::Unit::TestCase
   def test_register_configuration_check
     BuddyAPI.reset
-    assert_raises(BuddyAPI::InvalidConfiguration) { BuddyAPI::Device.register("") }
+    sleep(1)
+
+    assert_raises(BuddyAPI::InvalidConfiguration) { BuddyAPI::Device.register('') }
   end
 
   def test_register_success
     TestHelper::configure_buddy
+    TestHelper.check_rate_limit
 
     response = BuddyAPI::Device.register('Gem Test')
 
@@ -20,11 +23,14 @@ class DeviceTest < Test::Unit::TestCase
 
   def test_register_missing_param
     TestHelper.configure_buddy
-    assert_raises(BuddyAPI::ParameterMissingRequiredValue) { BuddyAPI::Device.register("") }
+    TestHelper.check_rate_limit
+
+    assert_raises(BuddyAPI::ParameterMissingRequiredValue) { BuddyAPI::Device.register('') }
   end
 
   def test_register_bad_param
     TestHelper.configure_buddy
+    TestHelper.check_rate_limit
 
     assert_raises(BuddyAPI::ParameterIncorrectFormat) do
       BuddyAPI::Device.register('Gem Test', { 'location' => '5050' })
@@ -33,6 +39,8 @@ class DeviceTest < Test::Unit::TestCase
 
   def test_update_success
     TestHelper.configure_buddy
+    TestHelper.check_rate_limit(2)
+
     response = BuddyAPI::Device.register('Gem Test')
     token = response['result']['accessToken']
 
@@ -40,6 +48,8 @@ class DeviceTest < Test::Unit::TestCase
   end
 
   def test_update_bad_token
+    TestHelper.check_rate_limit
+
     assert_raises(BuddyAPI::AuthAccessTokenInvalid) do
      BuddyAPI::Device.update('hi', { 'location' => '50,50' })
    end
@@ -50,6 +60,8 @@ class DeviceTest < Test::Unit::TestCase
   # This test currently accounts for it, and will need to be updated later.
   def test_update_bad_param
     TestHelper.configure_buddy
+    TestHelper.check_rate_limit(2)
+
     response = BuddyAPI::Device.register('Gem Test')
     token = response['result']['accessToken']
 

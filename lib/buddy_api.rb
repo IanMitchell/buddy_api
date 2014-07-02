@@ -48,10 +48,6 @@ module BuddyAPI
   @@request_counter = Array.new
 
   # Public: TODO: Implement
-  def init
-  end
-
-  # Public: TODO: Implement
   def self.valid_configuration?
     plan = (self.tier.eql?(:free) || self.tier.eql?(:pro) || self.tier.eql?(:enterprise))
     credentials = !(self.app_id.nil? || self.app_key.nil?)
@@ -91,12 +87,12 @@ module BuddyAPI
   end
 
   # Public: TODO: Document
-  def rate_capped?
+  def self.rate_capped?
     requests_left.eql? 0
   end
 
   # Public: TODO: Document
-  def requests_left
+  def self.requests_left
     raise InvalidConfiguration, 'Buddy API is not configured' unless valid_configuration?
 
     update_request_counter
