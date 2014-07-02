@@ -55,9 +55,6 @@ class DeviceTest < Test::Unit::TestCase
    end
   end
 
-  # NOTE: Currently there is a bug with Buddy. If you send an incorrectly
-  # formatted parameter, the server responds with a 500 error.
-  # This test currently accounts for it, and will need to be updated later.
   def test_update_bad_param
     TestHelper.configure_buddy
     TestHelper.check_rate_limit(2)
@@ -65,8 +62,38 @@ class DeviceTest < Test::Unit::TestCase
     response = BuddyAPI::Device.register('Gem Test')
     token = response['result']['accessToken']
 
-    assert_raises(BuddyAPI::UnknownResponseCode) do
+    assert_raises(BuddyAPI::ParameterIncorrectFormat) do
       BuddyAPI::Device.update(token, { 'location' => '[50,50]' })
+    end
+  end
+
+  def test_crash_report_success
+    TestHelper.configure_buddy
+    TestHelper.check_rate_limit(2)
+
+    response = BuddyAPI::Device.register('Gem Test')
+    token = response['result']['accessToken']
+
+    assert BuddyAPI::Device.crash_report(token, 'crash report success stack trace')
+  end
+
+  def test_crash_report_bad_token
+    TestHelper.check_rate_limit
+
+    assert_raises(BuddyAPI::AuthAccessTokenInvalid) do
+     BuddyAPI::Device.crash_report('hi', 'crash report failure stack trace')
+   end
+  end
+
+  def test_crash_report_bad_param
+    TestHelper.configure_buddy
+    TestHelper.check_rate_limit(2)
+
+    response = BuddyAPI::Device.register('Gem Test')
+    token = response['result']['accessToken']
+
+    assert_raises(BuddyAPI::ParameterIncorrectFormat) do
+      BuddyAPI::Device.crash_report(token, 'stack trace', { 'location' => '[50,50]' })
     end
   end
 end
