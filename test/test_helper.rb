@@ -14,10 +14,10 @@ class TestHelper
 
   # This depends on the requests_left method working.
   def self.check_rate_limit(count = nil)
-    sleep(1) if BuddyAPI.rate_capped?
+    sleep(1.1) if BuddyAPI.rate_capped?
 
     if count && BuddyAPI.requests_left < count
-      sleep(1)
+      sleep(1.1)
     end
   end
 end

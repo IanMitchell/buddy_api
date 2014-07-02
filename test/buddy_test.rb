@@ -28,13 +28,13 @@ class BuddyTest < Test::Unit::TestCase
     BuddyAPI.increment_call_count
     assert_equal 1, BuddyAPI.call_count
 
-    sleep(1)
+    sleep(1.1)
     assert_equal 0, BuddyAPI.call_count
   end
 
   def test_valid_rate_capped
     TestHelper.configure_buddy
-    sleep(1)
+    sleep(1.1)
 
     BuddyAPI::FREE_TIER_CAP.times do |i|
       assert !BuddyAPI.rate_capped?
@@ -45,7 +45,7 @@ class BuddyTest < Test::Unit::TestCase
     assert BuddyAPI.rate_capped?
 
 
-    sleep(1)
+    sleep(1.1)
     BuddyAPI.configure { |config| config.tier = :enterprise }
 
     BuddyAPI::ENTERPRISE_TIER_CAP.times do |i|
