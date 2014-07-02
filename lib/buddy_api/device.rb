@@ -47,11 +47,17 @@ module BuddyAPI
       raise InvalidConfiguration, 'Buddy API is not configured' unless BuddyAPI.valid_configuration?
 
       uri = URI(BuddyAPI.request_url + '/devices')
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
+      request = Net::HTTP::Post.new(uri.request_uri)
       params = { 'appID' => BuddyAPI.app_id, 'appKey' => BuddyAPI.app_key, 'platform' => platform }
       params.merge! options
 
-      response = Net::HTTP.post_form(uri, params)
+      request.set_form_data(params)
+
+      response = http.request(request)
       body = JSON.parse(response.body)
 
       BuddyAPI.increment_call_count
