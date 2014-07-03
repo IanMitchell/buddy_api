@@ -113,7 +113,7 @@ module BuddyAPI
       http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       request = Net::HTTP::Patch.new(uri.request_uri)
-      request["Authorization"] = "Buddy #{token}"
+      request['Authorization'] = "Buddy #{token}"
       request.set_form_data(options)
 
       response = http.request(request)
@@ -171,7 +171,7 @@ module BuddyAPI
       http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       request = Net::HTTP::Post.new(uri.request_uri)
-      request["Authorization"] = "Buddy #{token}"
+      request['Authorization'] = "Buddy #{token}"
       request.set_form_data(options.merge({ 'stackTrace' => stack_trace }))
 
       response = http.request(request)

@@ -23,4 +23,8 @@ module BuddyAPI
   # Public: Raised when an access token is invalid
   # or expired.
   class AuthAccessTokenInvalid < Exception; end
+
+  # Public: Raised when you attempt to create a User
+  # that already exists
+  class ItemAlreadyExists < Exception; end
 end

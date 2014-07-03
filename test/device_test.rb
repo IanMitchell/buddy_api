@@ -11,7 +11,7 @@ class DeviceTest < Test::Unit::TestCase
   end
 
   def test_register_success
-    TestHelper::configure_buddy
+    TestHelper.configure_buddy
     TestHelper.check_rate_limit
 
     response = BuddyAPI::Device.register('Gem Test')
