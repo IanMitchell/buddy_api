@@ -46,3 +46,8 @@ To test this gem, you'll need to register a test application on Buddy. Make a ne
     appKey: Your Key Here
 
 After that, you should be able to run `rake test` effectively.
+
+
+## Changelog
+
+N/A
