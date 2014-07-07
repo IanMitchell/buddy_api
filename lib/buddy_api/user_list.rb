@@ -68,7 +68,7 @@ module BuddyAPI
       end
     end
 
-    # Public: TODO: Implement
+    # Public: TODO: Test, Document
     def remove(token, user_list_id, id)
       path = DELETE_PATH.gsub('#{user_list_id', user_list_id.to_s)
                         .gsub('#{id}', id.to_s)
