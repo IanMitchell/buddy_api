@@ -33,51 +33,46 @@ class DeviceTest < Test::Unit::TestCase
     TestHelper.check_rate_limit
 
     assert_raises(BuddyAPI::ParameterIncorrectFormat) do
-      BuddyAPI::Device.register('Gem Test', { 'location' => '5050' })
+      BuddyAPI::Device.register('Gem Test', { location: '5050' })
     end
   end
 
   def test_update_success
     TestHelper.configure_buddy
-    TestHelper.check_rate_limit(2)
+    TestHelper.check_rate_limit
+    token = TestHelper.get_device_token
 
-    response = BuddyAPI::Device.register('Gem Test')
-    token = response['result']['accessToken']
-
-    assert BuddyAPI::Device.update(token, { 'location' => '50,50' })
+    assert BuddyAPI::Device.update(token, { location: '50,50' })
   end
 
   def test_update_bad_token
     TestHelper.check_rate_limit
 
     assert_raises(BuddyAPI::AuthAccessTokenInvalid) do
-     BuddyAPI::Device.update('hi', { 'location' => '50,50' })
+     BuddyAPI::Device.update('hi', { location: '50,50' })
    end
   end
 
   def test_update_bad_param
     TestHelper.configure_buddy
-    TestHelper.check_rate_limit(2)
-
-    response = BuddyAPI::Device.register('Gem Test')
-    token = response['result']['accessToken']
+    TestHelper.check_rate_limit
+    token = TestHelper.get_device_token
 
     assert_raises(BuddyAPI::ParameterIncorrectFormat) do
-      BuddyAPI::Device.update(token, { 'location' => '[50,50]' })
+      BuddyAPI::Device.update(token, { location: '[50,50]' })
     end
   end
 
   def test_crash_report_success
     TestHelper.configure_buddy
-    TestHelper.check_rate_limit(2)
-
-    response = BuddyAPI::Device.register('Gem Test')
-    token = response['result']['accessToken']
+    TestHelper.check_rate_limit
+    token = TestHelper.get_device_token
 
     assert BuddyAPI::Device.crash_report(token, 'crash report success stack trace')
   end
 
   def test_crash_report_bad_token
+    TestHelper.configure_buddy
     TestHelper.check_rate_limit
 
     assert_raises(BuddyAPI::AuthAccessTokenInvalid) do
@@ -85,15 +80,23 @@ class DeviceTest < Test::Unit::TestCase
    end
   end
 
+  def test_crash_report_missing_param
+    TestHelper.configure_buddy
+    TestHelper.check_rate_limit
+    token = TestHelper.get_device_token
+
+    assert_raises(BuddyAPI::ParameterMissingRequiredValue) do
+      BuddyAPI::Device.crash_report(token, '', { message: 'test message here' })
+    end
+  end
+
   def test_crash_report_bad_param
     TestHelper.configure_buddy
-    TestHelper.check_rate_limit(2)
-
-    response = BuddyAPI::Device.register('Gem Test')
-    token = response['result']['accessToken']
+    TestHelper.check_rate_limit
+    token = TestHelper.get_device_token
 
     assert_raises(BuddyAPI::ParameterIncorrectFormat) do
-      BuddyAPI::Device.crash_report(token, 'stack trace', { 'location' => '[50,50]' })
+      BuddyAPI::Device.crash_report(token, 'stack trace', { location: '[50,50]' })
     end
   end
 end

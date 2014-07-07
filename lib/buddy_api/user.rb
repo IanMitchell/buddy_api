@@ -1,34 +1,23 @@
 module BuddyAPI
   module User
+    CREATE_PATH = '/users'
+    LOGIN_PATH = '/users/login'
+
     # Public: TODO: Document
     def self.create(token, username, password, options = {})
-      raise InvalidConfiguration, 'Buddy API is not configured' unless BuddyAPI.valid_configuration?
-
-      uri = URI(BuddyAPI.request_url + '/users')
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-
-      request = Net::HTTP::Post.new(uri.request_uri)
-      request['Authorization'] = "Buddy #{token}"
-
-      params = { 'userName' => username, 'password' => password }
+      params = { userName: username, password: password }
       params.merge! options
 
-      request.set_form_data(params)
+      response = BuddyAPI.buddy_request(BuddyAPI::POST,
+                                        CREATE_PATH,
+                                        options: params,
+                                        token: token)
 
-      response = http.request(request)
       body = JSON.parse(response.body)
-
-      BuddyAPI.increment_call_count
 
       case response.code
       when '401', '400'
-        begin
-          raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
-        rescue
-          raise UnknownError, "Unknown Error encountered: #{body['error']}"
-        end
+        BuddyAPI.buddy_error(body)
       when '200'
         return body
       else
@@ -36,8 +25,24 @@ module BuddyAPI
       end
     end
 
-    # Public: TODO: Implement
-    def login
+    # Public: TODO: Test, Document
+    def self.login(token, username, password)
+      params = { userName: username, password: password }
+      response = BuddyAPI.buddy_request(BuddyAPI::POST,
+                                        LOGIN_PATH,
+                                        options: params,
+                                        token: token)
+
+      body = JSON.parse(response.body)
+
+      case response.code
+      when '401', '400'
+        BuddyAPI.buddy_error(body)
+      when '200'
+        return body
+      else
+        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+      end
     end
 
     # Public: TODO: Implement

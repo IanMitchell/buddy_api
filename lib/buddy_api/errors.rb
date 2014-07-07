@@ -25,6 +25,10 @@ module BuddyAPI
   class AuthAccessTokenInvalid < Exception; end
 
   # Public: Raised when you attempt to create a User
-  # that already exists
+  # that already exists.
   class ItemAlreadyExists < Exception; end
+
+  # Public: Raised when you attempt to login with incorrect
+  # credentials.
+  class AuthBadUsernameOrPassword < Exception; end
 end

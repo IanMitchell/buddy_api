@@ -47,6 +47,15 @@ module BuddyAPI
   # Private: Tracks the most recent API calls for rate limiting information.
   @@request_counter = Array.new
 
+  # Public: Identifier for a GET request
+  GET   = 0
+
+  # Public: Identifier for a PATCH request
+  PATCH = 1
+
+  # Public: Identifier for a POST request
+  POST  = 2
+
   # Public: Determines if the configuration has been correctly set.
   # This is used by the Gem internally, but is available if needed.
   #
@@ -175,6 +184,60 @@ module BuddyAPI
       PRO_TIER_CAP - @@request_counter.count
     when :enterprise
       ENTERPRISE_TIER_CAP - @@request_counter.count
+    end
+  end
+
+  # Public: Sends a request to Buddy. It is
+  # recommended to let the Gem handle this, but is
+  # available if necessary.
+  #
+  # Examples
+  #
+  #   BuddyAPI.buddy_request(BuddyAPI::POST, REGISTER_PATH)
+  #   # => #<Net::HTTPOK:0x007f870b12c908>
+  #
+  # Returns the HTTP Response
+  def self.buddy_request(type, url, options:  {}, token: nil)
+    unless BuddyAPI.valid_configuration?
+      raise InvalidConfiguration, 'Buddy API is not configured'
+    end
+
+    uri = URI(BuddyAPI.request_url + url)
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+
+    case type
+    when POST
+      request = Net::HTTP::Post.new(uri.request_uri)
+    when PATCH
+      request = Net::HTTP::Patch.new(uri.request_uri)
+    end
+
+    request['Authorization'] = "Buddy #{token}" unless token.nil?
+    request.set_form_data(options)
+
+    BuddyAPI.increment_call_count
+    response = http.request(request)
+  end
+
+  # Public: Handles a Buddy Exception. It is recommended
+  # to let the Gem handle this, but is available if necessary.
+  #
+  # Examples
+  #
+  #   BuddyAPI.buddy_error(json_body)
+  #   # => BuddyAPI::ParameterIncorrectFormat
+  #
+  # Returns Nothing
+  # Raises a variety of Buddy Errors
+  # Raises UnknownError if Buddy Error not defined in Gem
+  def self.buddy_error(body)
+    begin
+      raise Module.const_get("BuddyAPI::#{body['error']}"), "#{body['errorNumber']}: #{body['message']}"
+    rescue
+      raise UnknownError, "Unknown Error encountered: #{body['error']}"
     end
   end
 end

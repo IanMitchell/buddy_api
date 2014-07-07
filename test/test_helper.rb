@@ -20,4 +20,11 @@ class TestHelper
       sleep(1.1)
     end
   end
+
+  def self.get_device_token
+    check_rate_limit
+
+    response = BuddyAPI::Device.register('Gem Test')
+    response['result']['accessToken']
+  end
 end
