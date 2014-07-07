@@ -21,10 +21,20 @@ class TestHelper
     end
   end
 
+  # This depends on Device.register working
   def self.get_device_token
     check_rate_limit
 
     response = BuddyAPI::Device.register('Gem Test')
+    response['result']['accessToken']
+  end
+
+  # This depends on Device.register and User.login working
+  def self.get_user_token
+    check_rate_limit
+    token = get_device_token
+
+    response = BuddyAPI::User.login(token, 'apiTest', 'password')
     response['result']['accessToken']
   end
 end

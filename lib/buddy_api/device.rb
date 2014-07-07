@@ -4,10 +4,10 @@ require 'net/https'
 module BuddyAPI
   module Device
     # Public: Buddy Device Register path
-    REGISTER_PATH = '/devices'
+    REGISTER_PATH     = '/devices'
 
     # Public: Buddy Device Update path
-    UPDATE_PATH = '/devices/current'
+    UPDATE_PATH       = '/devices/current'
 
     # Public: Buddy Device Crash Report path
     CRASH_REPORT_PATH = '/devices/current/crashreports'

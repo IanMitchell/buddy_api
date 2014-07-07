@@ -33,28 +33,31 @@ module BuddyAPI
   ROOT_URL = 'https://api.buddyplatform.com'
 
   # Public: Calls/Second rate-limit cap for Free tier.
-  FREE_TIER_CAP = 20
+  FREE_TIER_CAP       = 20
 
   # Public: Calls/Second rate-limit cap for Pro tier.
-  PRO_TIER_CAP = 40
+  PRO_TIER_CAP        = 40
 
   # Public: Calls/Second rate-limit cap for Enterprise tier.
   ENTERPRISE_TIER_CAP = 60
 
   # Private: Stored serviceEndpoint returned from Device.register.
-  @@request_url = nil
+  @@request_url     = nil
 
   # Private: Tracks the most recent API calls for rate limiting information.
   @@request_counter = Array.new
 
   # Public: Identifier for a GET request
-  GET   = 0
+  GET    = 0
 
   # Public: Identifier for a PATCH request
-  PATCH = 1
+  PATCH  = 1
 
   # Public: Identifier for a POST request
-  POST  = 2
+  POST   = 2
+
+  # Public: Identifier for a DELETE request
+  DELETE = 3
 
   # Public: Determines if the configuration has been correctly set.
   # This is used by the Gem internally, but is available if needed.
