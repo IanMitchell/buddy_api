@@ -59,6 +59,9 @@ module BuddyAPI
   # Public: Identifier for a DELETE request
   DELETE = 3
 
+  # Public: Identifier for a PUT request
+  PUT    = 4
+
   # Public: Determines if the configuration has been correctly set.
   # This is used by the Gem internally, but is available if needed.
   #
