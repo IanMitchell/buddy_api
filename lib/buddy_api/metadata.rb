@@ -1,5 +1,5 @@
 module BuddyAPI
-  class MetaData
+  module MetaData
     # Public: TODO: Implement
     def set
     end

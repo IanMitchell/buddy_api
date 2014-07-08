@@ -73,7 +73,9 @@ module BuddyAPI
 
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
@@ -118,7 +120,9 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
@@ -167,7 +171,9 @@ module BuddyAPI
       when '201'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}: #{response.body}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
   end

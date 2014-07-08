@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Metric
+  module Metric
     # Public: TODO: Implement
     def record
     end

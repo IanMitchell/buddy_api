@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Game
+  module Game
     # Public: TODO: Implement
     def create
     end

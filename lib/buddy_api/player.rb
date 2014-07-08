@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Player
+  module Player
     # Public: TODO: Implement
     def create
     end

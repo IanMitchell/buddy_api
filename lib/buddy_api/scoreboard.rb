@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Scoreboard
+  module Scoreboard
     # Public: TODO: Implement
     def create
     end

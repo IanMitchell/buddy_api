@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Video
+  module Video
     # Public: TODO: Implement
     def create
     end

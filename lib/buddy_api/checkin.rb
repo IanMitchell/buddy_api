@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Checkin
+  module Checkin
     # Public: TODO: Implement
     def create
     end

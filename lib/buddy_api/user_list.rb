@@ -1,5 +1,5 @@
 module BuddyAPI
-  class UserList
+  module UserList
     CREATE_PATH = '/users/lists'
     GET_PATH    = '/users/lists/#{id}/items'
     ADD_PATH    = '/users/lists/#{user_list_id}/items/#{id}'
@@ -7,7 +7,7 @@ module BuddyAPI
     LIST_PATH   = '/users/lists/#{id}/items'
 
     # Public: TODO: Test, Document
-    def create(token, name)
+    def self.create(token, name)
       params = { name: name }
 
       response = BuddyAPI.buddy_request(BuddyAPI::POST,
@@ -23,12 +23,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def get(token, id)
+    def self.get(token, id)
       path = GET_PATH.gsub '#{id}', id.to_s
 
       response = BuddyAPI.buddy_request(BuddyAPI::GET,
@@ -43,12 +45,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def add(token, user_list_id, id)
+    def self.add(token, user_list_id, id)
       path = ADD_PATH.gsub('#{user_list_id', user_list_id.to_s)
                      .gsub('#{id}', id.to_s)
 
@@ -64,12 +68,14 @@ module BuddyAPI
       when '200'
         return body['result'].eql? true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def remove(token, user_list_id, id)
+    def self.remove(token, user_list_id, id)
       path = DELETE_PATH.gsub('#{user_list_id', user_list_id.to_s)
                         .gsub('#{id}', id.to_s)
 
@@ -85,12 +91,14 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def list(token, id)
+    def self.list(token, id)
       path = LIST_PATH.gsub '#{id}', id.to_s
 
       response = BuddyAPI.buddy_request(BuddyAPI::GET,
@@ -105,7 +113,9 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
   end

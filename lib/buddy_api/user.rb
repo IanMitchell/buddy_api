@@ -29,7 +29,9 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
@@ -49,12 +51,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def social_login(token, provider, id, access_token)
+    def self.social_login(token, provider, id, access_token)
       params =  {
                   identityProviderName: provider,
                   identityID: id,
@@ -73,12 +77,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def logout(token)
+    def self.logout(token)
       response = BuddyAPI.buddy_request(BuddyAPI::POST,
                                         LOGOUT_PATH,
                                         token: token)
@@ -91,12 +97,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def get(token, id)
+    def self.get(token, id)
       response = BuddyAPI.buddy_request(BuddyAPI::GET,
                                         GET_PATH + "/#{id}",
                                         token: token)
@@ -109,12 +117,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def search(token, location_range, options)
+    def self.search(token, location_range, options)
       params = { locationRange: locationRange }
       params.merge! options
 
@@ -131,12 +141,14 @@ module BuddyAPI
       when '200'
         return body
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+      raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                        __method__,
+                                                        response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def update(token, id, options)
+    def self.update(token, id, options)
       response = BuddyAPI.buddy_request(BuddyAPI::PATCH,
                                         UPDATE_PATH + "/#{id}",
                                         token: token,
@@ -150,12 +162,14 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def delete(token, id)
+    def self.delete(token, id)
       response = BuddyAPI.buddy_request(BuddyAPI::DELETE,
                                         DELETE_PATH + "/#{id}",
                                         token: token)
@@ -168,12 +182,14 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def reset_password_request(token, user_name, subject, body)
+    def self.reset_password_request(token, user_name, subject, body)
       params = { userName: user_name, subject: subject, body: body }
 
       response = BuddyAPI.buddy_request(BuddyAPI::POST,
@@ -189,12 +205,14 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
 
     # Public: TODO: Test, Document
-    def reset_password(token, user_name, reset_code, new_password)
+    def self.reset_password(token, user_name, reset_code, new_password)
       params =  {
                   userName: user_name,
                   resetCode: reset_code,
@@ -214,7 +232,9 @@ module BuddyAPI
       when '200'
         return true
       else
-        raise UnknownResponseCode, "#{self}.#{__method__} does not handle response #{response.code}"
+        raise UnknownResponseCode, BuddyAPI.error_message(self,
+                                                          __method__,
+                                                          response.code)
       end
     end
   end

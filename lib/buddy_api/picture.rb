@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Picture
+  module Picture
     # Public: TODO: Implement
     def create
     end

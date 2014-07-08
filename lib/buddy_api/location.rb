@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Location
+  module Location
     # Public: TODO: Implement
     def create
     end

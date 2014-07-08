@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Blob
+  module Blob
     # Public: TODO: Implement
     def create
     end

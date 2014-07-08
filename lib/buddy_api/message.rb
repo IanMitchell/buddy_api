@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Message
+  module Message
     # Public: TODO: Implement
     def send
     end

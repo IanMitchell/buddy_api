@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Album
+  module Album
     # Public: TODO: Implement
     def create
     end

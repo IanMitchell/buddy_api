@@ -72,7 +72,10 @@ module BuddyAPI
   #
   # Returns a Boolean
   def self.valid_configuration?
-    plan = (self.tier.eql?(:free) || self.tier.eql?(:pro) || self.tier.eql?(:enterprise))
+    plan = (self.tier.eql?(:free) ||
+           self.tier.eql?(:pro) ||
+           self.tier.eql?(:enterprise))
+
     credentials = !(self.app_id.nil? || self.app_key.nil?)
 
     plan && credentials
@@ -245,5 +248,18 @@ module BuddyAPI
     rescue
       raise UnknownError, "Unknown Error encountered: #{body['error']}"
     end
+  end
+
+  # Public: Error message for an UnknownError Exception. This is
+  # used by the Gem internally, but is available if necessary.
+  #
+  # Examples
+  #
+  #   BuddyAPI.error_message(self, __method__, 400)
+  #   # => "BuddyAPI.error_message does not handle response 400"
+  #
+  # Returns a String
+  def error_message(name, method, code)
+    "#{name}.#{method} does not handle response #{code}"
   end
 end

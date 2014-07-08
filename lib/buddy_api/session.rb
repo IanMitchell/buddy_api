@@ -1,5 +1,5 @@
 module BuddyAPI
-  class Session
+  module Session
     # Public: TODO: Implement
     def create
     end
