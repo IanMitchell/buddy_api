@@ -29,7 +29,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def remove(token, provider, id = nil)
+    def self.remove(token, provider, id = nil)
       path = REMOVE_PATH + "/#{provider}"
       path += "/#{id}" unless id.nil?
 
@@ -52,7 +52,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def find(token, provider, id)
+    def self.find(token, provider, id)
       path = FIND_PATH + "/#{provider}/#{id}"
 
       response = BuddyAPI.buddy_request(BuddyAPI::GET,
@@ -74,7 +74,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def get(token, provider = nil)
+    def self.get(token, provider = nil)
       path = GET_PATH
       path += "/#{provider}" unless provider.nil?
 
