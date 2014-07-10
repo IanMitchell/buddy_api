@@ -114,8 +114,8 @@ module BuddyAPI
       end
     end
 
-    # Public: TODO: Implement
-    def delete(token, key, id, visibility)
+    # Public: TODO: Test, Document
+    def self.delete(token, key, id, visibility)
       path = DELETE_PATH + "/#{id}/#{key}"
 
       params = { visibility: visibility }
