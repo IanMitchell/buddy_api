@@ -4,7 +4,9 @@
 
 Currently, most of the code is in, and some calls are functional. Before I release, I want to get some more tests running however. After I have a significant portion tested, I'll release a few betas and continue finalizing different modules.
 
-There is currently significant code reuse. I'm not sure if I'll be working on that before or after release, but it is something that will get accomplished quickly. 
+There is currently significant code reuse. I'm not sure if I'll be working on that before or after release, but it is something that will get accomplished quickly.
+
+Another time I'm going to look at is module nesting (for instance, instead of having `Game` and `Session` separate, have `Session` exist within `Game`).
 
 
 ----
