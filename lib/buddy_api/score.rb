@@ -3,7 +3,7 @@ module BuddyAPI
     CREATE_PATH = '/games/#{gameId}/sessions/#{sessionId}/scores'
 
     # Public: TODO: Test, Document
-    def create(token, game_id, session_id, score = nil, options = {})
+    def self.create(token, game_id, session_id, score = nil, options = {})
       path = CREATE_PATH.gsub('#{gameId}', game_id.to_s)
                         .gsub('#{sessionId}', session_id.to_s)
       path += "?score=#{score}" unless score.nil?
