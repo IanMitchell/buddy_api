@@ -35,7 +35,7 @@ module BuddyAPI
 
     # Public: TODO: Test, Document
     def self.increment(token, id, key, visibility, delta)
-      path = INCREMENT_PATH.gsub('#{id', id.to_s)
+      path = INCREMENT_PATH.gsub('#{id}', id.to_s)
                            .gsub('#{key}', key.to_s)
 
       params =  {
