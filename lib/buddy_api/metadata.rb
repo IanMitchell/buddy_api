@@ -7,7 +7,7 @@ module BuddyAPI
     DELETE_PATH    = '/metadata' # + id + key
 
     # Public: TODO: Test, Document
-    def self.set(token, id, values, visibility, options)
+    def self.set(token, id, values, visibility, options = {})
       params =  {
                   keyValuePairs: values,
                   visibility: visibility,
@@ -88,7 +88,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def self.search(token, id, visibility, location_range, options)
+    def self.search(token, id, visibility, location_range, options = {})
       params =  {
                   visibility: visibility,
                   locationRange: location_range

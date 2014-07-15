@@ -4,7 +4,7 @@ module BuddyAPI
     RECORD_RECIEVE_PATH = '/notifications/received' # + id
 
     # Public: TODO: Test, Document
-    def self.send(token, options)
+    def self.send(token, options = {})
       response = BuddyAPI.buddy_request(BuddyAPI::POST,
                                         SEND_PATH,
                                         options: options,

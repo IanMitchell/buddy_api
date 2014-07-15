@@ -8,7 +8,7 @@ module BuddyAPI
     DELETE_PATH = '/pictures' # + id
 
     # Public: TODO: Test, Document
-    def self.create(token, data, options)
+    def self.create(token, data, options = {})
       params = { data: data }
       params.merge! options
 
@@ -82,7 +82,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def self.search(token, options)
+    def self.search(token, options = {})
       response = BuddyAPI.buddy_request(BuddyAPI::GET,
                                         SEARCH_PATH,
                                         options: options,
@@ -103,7 +103,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def self.update(token, id, options)
+    def self.update(token, id, options = {})
       response = BuddyAPI.buddy_request(BuddyAPI::PATCH,
                                         UPDATE_PATH + "/#{id}",
                                         token: token,

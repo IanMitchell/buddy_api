@@ -4,7 +4,7 @@ module BuddyAPI
     FINISH_PATH = '/metrics/events' # + id
 
     # Public: TODO: Implement
-    def self.record(token, key, options)
+    def self.record(token, key, options = {})
       response = BuddyAPI.buddy_request(BuddyAPI::POST,
                                         RECORD_PATH + "/#{key}",
                                         options: options,
@@ -25,7 +25,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Implement
-    def self.finish(token, id, options)
+    def self.finish(token, id, options = {})
       response = BuddyAPI.buddy_request(BuddyAPI::DELETE,
                                         FINISH_PATH + "/#{id}",
                                         options: options,

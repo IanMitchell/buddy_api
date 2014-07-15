@@ -8,7 +8,7 @@ module BuddyAPI
     FLAG_PATH   = '/locations/#{id}/flag'
 
     # Public: TODO: Test, Document
-    def self.create(token, name, location, description, category, options)
+    def self.create(token, name, location, description, category, options = {})
       params =  {
                   name: name,
                   location: location,
@@ -57,7 +57,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def self.search(token, location_range, options)
+    def self.search(token, location_range, options = {})
       params = { locationRange: location_range }
       params.merge! options
 
@@ -81,7 +81,7 @@ module BuddyAPI
     end
 
     # Public: TODO: Test, Document
-    def self.update(token, id, options)
+    def self.update(token, id, options = {})
       response = BuddyAPI.buddy_request(BuddyAPI::PATCH,
                                         UPDATE_PATH + "/#{id}",
                                         token: token,
