@@ -2,6 +2,10 @@
 
 **Note:** This Gem is currently in development and unreleased at this time. Eventually, the below will be true!
 
+Currently, most of the code is in, and some calls are functional. Before I release, I want to get some more tests running however. After I have a significant portion tested, I'll release a few betas and continue finalizing different modules.
+
+There is currently significant code reuse. I'm not sure if I'll be working on that before or after release, but it is something that will get accomplished quickly. 
+
 
 ----
 
