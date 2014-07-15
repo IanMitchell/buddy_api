@@ -89,7 +89,7 @@ module BuddyAPI
 
     # Public: TODO: Test, Document
     def self.delete(token, game_id, scoreboard_id)
-      path = GET_PATH.gsub '#{gameId}', game_id.to_s
+      path = DELETE_PATH.gsub '#{gameId}', game_id.to_s
       path += "/#{scoreboard_id}"
 
       response = BuddyAPI.buddy_request(BuddyAPI::DELETE,
