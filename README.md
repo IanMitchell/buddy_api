@@ -1,17 +1,46 @@
 # Buddy API
 
-**Note:** This Gem is currently in development and unreleased at this time. Eventually, the below will be true!
+**Note:** _This Gem is currently in development and unreleased at this time._
 
-Currently, most of the code is in, and some calls are functional. Before I release, I want to get some more tests running however. After I have a significant portion tested, I'll release a few betas and continue finalizing different modules.
+Most of the Buddy API codebase is in, it just hasn't been tested yet. There also is currently significant code reuse. Both problems are being worked on over time!
 
-There is currently significant code reuse. I'm not sure if I'll be working on that before or after release, but it is something that will get accomplished quickly.
 
-Another time I'm going to look at is module nesting (for instance, instead of having `Game` and `Session` separate, have `Session` exist within `Game`).
+### Fully Tested and Documented
 
+1. Core (Used internally by Gem)
+2. Device
+3. User
+
+### Tested and Undocumented
+
+1. N/A
+
+### Untested and Undocumented
+
+1. Album
+2. Album Item
+3. Blob
+4. Checkin
+5. Game
+6. Identity
+7. Location
+8. Message
+9. Metadata
+10. Metric
+11. Picture
+12. Player
+13. Push
+14. Score
+15. Scoreboard
+16. Session
+17. User List
+18. Video
 
 ----
 
 ## Installation
+
+_Since this gem is currently unreleased, the below is not true._
 
 Add this line to your application's Gemfile:
 
@@ -25,9 +54,9 @@ Or install it yourself as:
 
     $ gem install buddy_api
 
-## Usage
+## Configuraton
 
-TODO: Write usage instructions here
+Before you can make calls, you must configure the gem as such:
 
     BuddyAPI.configure do |config|
       config.app_id = 'AppID Here'
@@ -35,14 +64,6 @@ TODO: Write usage instructions here
       # Must be one of [:free, :pro, :enterprise]. Defaults to :free
       config.tier = :free
     end
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/buddy_api/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
 
 #### Testing
 
