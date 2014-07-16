@@ -131,7 +131,7 @@ class AlbumItemTest < Test::Unit::TestCase
     assert false, "Unimplemented"
   end
 
-  def test_update_bad_authorization
+  def test_delete_bad_authorization
     assert false, "Unimplemented"
   end
 end
