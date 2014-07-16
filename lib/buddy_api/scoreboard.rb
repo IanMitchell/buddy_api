@@ -17,7 +17,7 @@ module BuddyAPI
       params.merge! options
 
       response = BuddyAPI.buddy_request(BuddyAPI::POST,
-                                        path
+                                        path,
                                         options: params,
                                         token: token)
 

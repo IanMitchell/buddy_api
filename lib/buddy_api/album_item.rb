@@ -108,7 +108,7 @@ module BuddyAPI
       path += "/#{item_id}"
 
       response = BuddyAPI.buddy_request(BuddyAPI::PATCH,
-                                        path
+                                        path,
                                         token: token,
                                         options: options)
 
