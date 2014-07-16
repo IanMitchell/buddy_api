@@ -47,7 +47,7 @@ class AlbumTest < Test::Unit::TestCase
     assert false, "Unimplemented"
   end
 
-  def test_searh_missing_parameter
+  def test_search_missing_parameter
     assert false, "Unimplemented"
   end
 
