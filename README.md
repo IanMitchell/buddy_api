@@ -9,11 +9,14 @@ Most of the Buddy API codebase is in, it just hasn't been tested yet. There also
 
 1. Core (used internally)
 2. Device
-3. User
 
 ### Tested and Undocumented
 
 1. N/A
+
+### Partially Tested and Undocumented
+
+1. User (Create, Login)
 
 ### Untested and Undocumented
 
@@ -77,4 +80,5 @@ After that, you should be able to run `rake test` effectively.
 
 ## Changelog
 
-N/A
+**Version 1.0.0**: _July X, 2014_
+* Implemented
