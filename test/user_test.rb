@@ -89,4 +89,6 @@ class UserTest < Test::Unit::TestCase
       BuddyAPI::User.login(token, '', 'wrongPassword')
     end
   end
+
+  # TODO: test other user methods
 end
