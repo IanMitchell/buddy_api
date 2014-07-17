@@ -7,7 +7,7 @@ Most of the Buddy API codebase is in, it just hasn't been tested yet. There also
 
 ### Fully Tested and Documented
 
-1. Core (Used internally by Gem)
+1. Core (used internally)
 2. Device
 3. User
 
