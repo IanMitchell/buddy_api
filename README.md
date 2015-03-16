@@ -1,6 +1,6 @@
 # Buddy API
 
-**Note:** _This Gem is currently in development and unreleased at this time. I'm still working on it, but development has hit a bit of a standstill while I finish up summer classes._
+**Note:** _This Gem is currently in development and unreleased at this time. I'm still working on it, but development has hit a bit of a standstill until I need it for a project I'm working on._
 
 Most of the Buddy API codebase is in, it just hasn't been tested yet. There also is currently significant code reuse. Both problems are being worked on over time!
 
